@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Portfolio | นายนพชัย สิทธิ ศึกษานิเทศก์</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: { 
+                extend: { 
+                    fontFamily: { sans: ['Sarabun', 'sans-serif'] }, 
+                    colors: { 
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 800: '#075985', 900: '#0c4a6e' }, 
+                        accent: { 500: '#f59e0b' } 
+                    } 
+                } 
+            }
+        }
+    </script>
+
+    <!-- Custom Styles for Web App -->
+    <style> 
+        .glass-effect { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
+        
+        /* Web App Logic Styles */
+        .page-view { 
+            display: none; 
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+        .page-view.active { 
+            display: block; 
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Smooth scroll for anchor links within pages */
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased font-sans flex flex-col min-h-screen">
+
+    <!-- Global Navigation -->
+    <header class="glass-effect shadow-sm sticky top-0 z-50 border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" onclick="navigate('home')" class="flex items-center space-x-3 group cursor-pointer">
+                <div class="w-10 h-10 bg-brand-800 rounded-lg flex items-center justify-center text-white group-hover:bg-brand-600 transition">
+                    <i class="fa-solid fa-chalkboard-user text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-lg font-bold text-brand-900 leading-none">นายนพชัย สิทธิ</h1>
+                    <p class="text-xs text-slate-500 mt-1 hidden sm:block">ศึกษานิเทศก์ชำนาญการพิเศษ</p>
+                </div>
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex space-x-6 text-sm font-medium">
+                <button onclick="navigate('home')" data-target="home" class="nav-btn text-brand-800 border-b-2 border-brand-800 pb-1 focus:outline-none">หน้าแรก</button>
+                <button onclick="navigate('about')" data-target="about" class="nav-btn text-slate-600 hover:text-brand-800 transition pb-1 focus:outline-none">ประวัติและผลงาน</button>
+                <button onclick="navigate('tools')" data-target="tools" class="nav-btn text-slate-600 hover:text-brand-800 transition pb-1 focus:outline-none">คลังสื่อ/เครื่องมือ</button>
+                <button onclick="navigate('news')" data-target="news" class="nav-btn text-slate-600 hover:text-brand-800 transition pb-1 focus:outline-none">ข่าวกิจกรรม</button>
+                <button onclick="navigate('contact')" data-target="contact" class="nav-btn text-slate-600 hover:text-brand-800 transition pb-1 focus:outline-none">ติดต่อ</button>
+            </nav>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="md:hidden text-slate-600 text-2xl focus:outline-none" onclick="toggleMobileMenu()">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Nav -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t px-4 py-2 pb-4 shadow-xl absolute w-full z-50">
+            <button onclick="navigate('home')" data-target="home" class="mobile-nav-btn block w-full text-left py-3 border-b border-slate-50 text-brand-800 font-medium focus:outline-none">หน้าแรก</button>
+            <button onclick="navigate('about')" data-target="about" class="mobile-nav-btn block w-full text-left py-3 border-b border-slate-50 text-slate-600 focus:outline-none">ประวัติและผลงาน</button>
+            <button onclick="navigate('tools')" data-target="tools" class="mobile-nav-btn block w-full text-left py-3 border-b border-slate-50 text-slate-600 focus:outline-none">คลังสื่อ/เครื่องมือนิเทศ</button>
+            <button onclick="navigate('news')" data-target="news" class="mobile-nav-btn block w-full text-left py-3 border-b border-slate-50 text-slate-600 focus:outline-none">ข่าวกิจกรรม</button>
+            <button onclick="navigate('contact')" data-target="contact" class="mobile-nav-btn block w-full text-left py-3 text-slate-600 focus:outline-none">ติดต่อ</button>
+        </div>
+    </header>
+
+    <!-- Main Content Area (Dynamic Views) -->
+    <main class="flex-grow">
+
+        <!-- ==================== 1. HOME VIEW ==================== -->
+        <div id="view-home" class="page-view active">
+            <section class="relative bg-brand-900 text-white overflow-hidden pt-12 pb-20 md:pt-20 md:pb-32">
+                <div class="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&q=80')] bg-cover bg-center"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-brand-900 to-transparent"></div>
+                
+                <div class="max-w-7xl mx-auto px-4 relative z-10 flex flex-col md:flex-row items-center">
+                    <div class="md:w-3/5 text-center md:text-left mb-10 md:mb-0">
+                        <span class="inline-block py-1 px-3 rounded-full bg-brand-800 border border-brand-600 text-xs font-semibold tracking-wider mb-4">WEBSITE FOR EDUCATIONAL SUPERVISION</span>
+                        <h2 class="text-3xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4">นิเทศแบบกัลยาณมิตร <br> <span class="text-accent-500">มุ่งสัมฤทธิ์ผลสู่นักเรียน</span></h2>
+                        <p class="text-brand-100 text-lg md:text-xl mb-8 max-w-xl">เว็บไซต์ Web App เพื่อการแบ่งปันความรู้ นวัตกรรม และเครื่องมือสำหรับการนิเทศการศึกษา เพื่อยกระดับคุณภาพการจัดการเรียนรู้ของสถานศึกษาในสังกัด</p>
+                        <div class="flex flex-wrap justify-center md:justify-start gap-4">
+                            <button onclick="navigate('tools')" class="bg-accent-500 hover:bg-yellow-500 text-brand-900 font-bold py-3 px-6 rounded-lg shadow-lg transition flex items-center">
+                                <i class="fa-solid fa-download mr-2"></i> ดาวน์โหลดเครื่องมือ
+                            </button>
+                            <button onclick="navigate('about')" class="bg-white/10 hover:bg-white/20 backdrop-blur border border-white/30 text-white font-medium py-3 px-6 rounded-lg transition">
+                                ทำความรู้จักเพิ่มเติม
+                            </button>
+                        </div>
+                    </div>
+                    <div class="md:w-2/5 flex justify-center">
+                        <div class="relative w-64 h-64 md:w-80 md:h-80">
+                            <div class="absolute inset-0 bg-brand-600 rounded-full mix-blend-multiply filter blur-2xl opacity-50 animate-pulse"></div>
+                            <div class="relative w-full h-full rounded-full border-4 border-white shadow-2xl overflow-hidden bg-slate-200 flex items-center justify-center">
+                                <!-- รูปโปรไฟล์หน้าแรก -->
+                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2394a3b8'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z'/%3E%3C/svg%3E" alt="Profile" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="bg-white border-b border-slate-200 shadow-sm relative z-20 -mt-8 mx-4 md:mx-auto max-w-5xl rounded-lg mb-16">
+                <div class="grid grid-cols-2 md:grid-cols-4 divide-x divide-slate-100 p-6 text-center">
+                    <div><p class="text-3xl font-bold text-brand-600">20+</p><p class="text-xs text-slate-500 mt-1">ปี ประสบการณ์</p></div>
+                    <div><p class="text-3xl font-bold text-brand-600">15</p><p class="text-xs text-slate-500 mt-1">โรงเรียนเครือข่าย</p></div>
+                    <div><p class="text-3xl font-bold text-brand-600">50+</p><p class="text-xs text-slate-500 mt-1">สื่อนวัตกรรม</p></div>
+                    <div><p class="text-3xl font-bold text-brand-600">100%</p><p class="text-xs text-slate-500 mt-1">ความมุ่งมั่นพัฒนา</p></div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ==================== 2. ABOUT VIEW ==================== -->
+        <div id="view-about" class="page-view">
+            <div class="bg-brand-900 py-10 relative">
+                <div class="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&q=80')] bg-cover bg-center"></div>
+                <div class="max-w-7xl mx-auto px-4 relative z-10 text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-2">ประวัติและผลงาน</h2>
+                    <p class="text-brand-200">ทำความรู้จักกับศึกษานิเทศก์ และผลงานทางวิชาการ</p>
+                </div>
+            </div>
+
+            <section class="py-16 max-w-7xl mx-auto px-4">
+                <div class="flex flex-col md:flex-row gap-12 items-center">
+                    <div class="md:w-1/2">
+                        <h3 class="text-3xl font-bold text-slate-800 mb-6">ผู้ขับเคลื่อนและส่งเสริม<br>การจัดการเรียนรู้ที่มีคุณภาพ</h3>
+                        <div class="prose prose-slate mb-6">
+                            <p class="text-slate-600 leading-relaxed mb-4">ผม <strong>นายนพชัย สิทธิ</strong> มีความมุ่งมั่นในการนำกระบวนการนิเทศแบบชี้แนะ (Coaching) และการเป็นพี่เลี้ยง (Mentoring) มาใช้เพื่อพัฒนาครูและยกระดับผลสัมฤทธิ์ทางการเรียนของผู้เรียน</p>
+                            <p class="text-slate-600 leading-relaxed">เป้าหมายหลักคือการสร้างเครือข่ายวิชาชีพครู (PLC) ที่เข้มแข็ง พร้อมสนับสนุนสื่อ นวัตกรรม และเทคโนโลยีที่ทันสมัย เพื่อตอบสนองต่อการศึกษาในศตวรรษที่ 21</p>
+                        </div>
+                        <div class="bg-brand-50 p-4 rounded-lg border-l-4 border-brand-500">
+                            <h4 class="font-bold text-brand-900 mb-2">บทบาทและหน้าที่ความรับผิดชอบ:</h4>
+                            <ul class="text-sm text-slate-700 space-y-2">
+                                <li><i class="fa-solid fa-check text-accent-500 mr-2"></i> นิเทศ ติดตาม และประเมินผลการจัดการศึกษา</li>
+                                <li><i class="fa-solid fa-check text-accent-500 mr-2"></i> ส่งเสริมและพัฒนาหลักสูตรสถานศึกษา</li>
+                                <li><i class="fa-solid fa-check text-accent-500 mr-2"></i> พัฒนากระบวนการจัดการเรียนรู้แบบ Active Learning</li>
+                                <li><i class="fa-solid fa-check text-accent-500 mr-2"></i> ส่งเสริมการวิจัยในชั้นเรียนเพื่อพัฒนาการเรียนรู้</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="md:w-1/2 grid grid-cols-2 gap-4">
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 text-center hover:shadow-md transition"><div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 text-xl"><i class="fa-solid fa-graduation-cap"></i></div><h5 class="font-bold text-slate-800">การศึกษา</h5><p class="text-xs text-slate-500 mt-2">ปริญญาโท การบริหารการศึกษา</p></div>
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 text-center hover:shadow-md transition"><div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4 text-xl"><i class="fa-solid fa-award"></i></div><h5 class="font-bold text-slate-800">วิทยฐานะ</h5><p class="text-xs text-slate-500 mt-2">ศน.ชำนาญการพิเศษ (คศ.3)</p></div>
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 text-center hover:shadow-md transition col-span-2 sm:col-span-1"><div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 text-xl"><i class="fa-solid fa-building"></i></div><h5 class="font-bold text-slate-800">สังกัด</h5><p class="text-xs text-slate-500 mt-2">สพป.ลำปาง เขต 2</p></div>
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 text-center hover:shadow-md transition col-span-2 sm:col-span-1"><div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center mx-auto mb-4 text-xl"><i class="fa-solid fa-book-open"></i></div><h5 class="font-bold text-slate-800">ความเชี่ยวชาญ</h5><p class="text-xs text-slate-500 mt-2">Active Learning, นวัตกรรม</p></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+
+        <!-- ==================== 3. TOOLS VIEW ==================== -->
+        <div id="view-tools" class="page-view">
+            <div class="bg-brand-900 py-10 relative">
+                <div class="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&q=80')] bg-cover bg-center"></div>
+                <div class="max-w-7xl mx-auto px-4 relative z-10 text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-2">คลังสื่อ และเครื่องมือการนิเทศ</h2>
+                    <p class="text-brand-200">รวบรวมแบบฟอร์ม แนวทาง คู่มือ สำหรับคุณครูและผู้บริหาร</p>
+                </div>
+            </div>
+
+            <section class="py-16 bg-brand-50 min-h-[50vh]">
+                <div class="max-w-7xl mx-auto px-4">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Tool 1 -->
+                        <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition flex flex-col">
+                            <div class="h-2 bg-red-500 w-full"></div>
+                            <div class="p-6 flex-grow">
+                                <div class="w-10 h-10 bg-red-50 text-red-500 rounded flex items-center justify-center mb-4"><i class="fa-solid fa-file-pdf text-xl"></i></div>
+                                <h4 class="font-bold text-slate-800 mb-2">แบบนิเทศ Active Learning</h4>
+                                <p class="text-sm text-slate-500 mb-4">แบบบันทึกการสังเกตชั้นเรียนและประเมินผลการจัดกิจกรรม</p>
+                            </div>
+                            <!-- แก้ไขลิงก์ดาวน์โหลดตรง href -->
+                            <div class="px-6 py-4 border-t border-slate-100 bg-slate-50 mt-auto"><a href="https://drive.google.com/" target="_blank" class="text-brand-600 font-medium text-sm flex items-center hover:text-brand-800">ดาวน์โหลด PDF <i class="fa-solid fa-arrow-down ml-2 text-xs"></i></a></div>
+                        </div>
+                        
+                        <!-- Tool 2 -->
+                        <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition flex flex-col">
+                            <div class="h-2 bg-green-500 w-full"></div>
+                            <div class="p-6 flex-grow">
+                                <div class="w-10 h-10 bg-green-50 text-green-600 rounded flex items-center justify-center mb-4"><i class="fa-solid fa-file-excel text-xl"></i></div>
+                                <h4 class="font-bold text-slate-800 mb-2">โปรแกรมวิเคราะห์ผลสัมฤทธิ์</h4>
+                                <p class="text-sm text-slate-500 mb-4">ไฟล์ Excel สำหรับวิเคราะห์คุณภาพข้อสอบและผลสัมฤทธิ์</p>
+                            </div>
+                            <div class="px-6 py-4 border-t border-slate-100 bg-slate-50 mt-auto"><a href="https://drive.google.com/" target="_blank" class="text-brand-600 font-medium text-sm flex items-center hover:text-brand-800">ดาวน์โหลด Excel <i class="fa-solid fa-arrow-down ml-2 text-xs"></i></a></div>
+                        </div>
+                        
+                        <!-- Tool 3 -->
+                        <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition flex flex-col">
+                            <div class="h-2 bg-blue-500 w-full"></div>
+                            <div class="p-6 flex-grow">
+                                <div class="w-10 h-10 bg-blue-50 text-blue-600 rounded flex items-center justify-center mb-4"><i class="fa-solid fa-file-word text-xl"></i></div>
+                                <h4 class="font-bold text-slate-800 mb-2">แผนการจัดการเรียนรู้บูรณาการ</h4>
+                                <p class="text-sm text-slate-500 mb-4">ไฟล์ Word ต้นแบบการเขียนแผนการสอนที่เน้นสมรรถนะ</p>
+                            </div>
+                            <div class="px-6 py-4 border-t border-slate-100 bg-slate-50 mt-auto"><a href="https://drive.google.com/" target="_blank" class="text-brand-600 font-medium text-sm flex items-center hover:text-brand-800">ดาวน์โหลด Word <i class="fa-solid fa-arrow-down ml-2 text-xs"></i></a></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+
+        <!-- ==================== 4. NEWS VIEW ==================== -->
+        <div id="view-news" class="page-view">
+            <div class="bg-brand-900 py-10 relative">
+                <div class="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&q=80')] bg-cover bg-center"></div>
+                <div class="max-w-7xl mx-auto px-4 relative z-10 text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-2">ข่าวกิจกรรม และการลงพื้นที่</h2>
+                    <p class="text-brand-200">อัปเดตความเคลื่อนไหว กิจกรรมการนิเทศ และการประชุม</p>
+                </div>
+            </div>
+
+            <section class="py-16 max-w-7xl mx-auto px-4 min-h-[50vh]">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- News 1 -->
+                    <article class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden group">
+                        <div class="h-48 bg-slate-200 relative overflow-hidden">
+                            <div class="absolute inset-0 flex items-center justify-center text-slate-400 bg-slate-100"><i class="fa-regular fa-image text-4xl"></i></div>
+                            <div class="absolute bottom-0 left-0 bg-accent-500 text-brand-900 font-bold text-xs px-3 py-1 z-20">นิเทศโรงเรียน</div>
+                        </div>
+                        <div class="p-5">
+                            <p class="text-xs text-slate-500 mb-2 flex items-center"><i class="fa-regular fa-calendar mr-2"></i> 20 มีนาคม 2569</p>
+                            <h4 class="font-bold text-slate-800 text-lg mb-2 leading-tight">การนิเทศเตรียมความพร้อมก่อนเปิดภาคเรียน</h4>
+                            <p class="text-sm text-slate-600 line-clamp-2">ลงพื้นที่นิเทศ ติดตาม การจัดเตรียมความพร้อมด้านอาคารสถานที่ และการจัดการเรียนการสอน</p>
+                        </div>
+                    </article>
+                    <!-- News 2 -->
+                    <article class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden group">
+                        <div class="h-48 bg-slate-200 relative overflow-hidden">
+                            <div class="absolute inset-0 flex items-center justify-center text-slate-400 bg-slate-100"><i class="fa-regular fa-image text-4xl"></i></div>
+                            <div class="absolute bottom-0 left-0 bg-brand-500 text-white font-bold text-xs px-3 py-1 z-20">ประชุม/อบรม</div>
+                        </div>
+                        <div class="p-5">
+                            <p class="text-xs text-slate-500 mb-2 flex items-center"><i class="fa-regular fa-calendar mr-2"></i> 15 มีนาคม 2569</p>
+                            <h4 class="font-bold text-slate-800 text-lg mb-2 leading-tight">บรรยายโครงการอบรมเชิงปฏิบัติการ การสร้างสื่อดิจิทัล</h4>
+                            <p class="text-sm text-slate-600 line-clamp-2">บรรยายและฝึกปฏิบัติการใช้เครื่องมือ AI สำหรับสร้างสื่อการสอนแบบ Interactive</p>
+                        </div>
+                    </article>
+                    <!-- News 3 -->
+                    <article class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden group">
+                        <div class="h-48 bg-slate-200 relative overflow-hidden">
+                            <div class="absolute inset-0 flex items-center justify-center text-slate-400 bg-slate-100"><i class="fa-regular fa-image text-4xl"></i></div>
+                            <div class="absolute bottom-0 left-0 bg-purple-500 text-white font-bold text-xs px-3 py-1 z-20">แลกเปลี่ยนเรียนรู้ (PLC)</div>
+                        </div>
+                        <div class="p-5">
+                            <p class="text-xs text-slate-500 mb-2 flex items-center"><i class="fa-regular fa-calendar mr-2"></i> 10 มีนาคม 2569</p>
+                            <h4 class="font-bold text-slate-800 text-lg mb-2 leading-tight">กิจกรรมชุมชนแห่งการเรียนรู้ทางวิชาชีพ คณิตศาสตร์</h4>
+                            <p class="text-sm text-slate-600 line-clamp-2">ร่วมกับคณะครูในเครือข่าย เพื่อหาแนวทางแก้ปัญหาการคิดคำนวณของผู้เรียนชั้น ป.3</p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </div>
+
+
+        <!-- ==================== 5. CONTACT VIEW ==================== -->
+        <div id="view-contact" class="page-view">
+            <div class="bg-brand-900 py-10 relative">
+                <div class="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&q=80')] bg-cover bg-center"></div>
+                <div class="max-w-7xl mx-auto px-4 relative z-10 text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-2">ช่องทางการติดต่อ</h2>
+                    <p class="text-brand-200">หากมีข้อสงสัย หรือต้องการสอบถามข้อมูลเพิ่มเติม สามารถติดต่อได้ที่นี่</p>
+                </div>
+            </div>
+
+            <section class="py-16 max-w-4xl mx-auto px-4 min-h-[50vh]">
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col md:flex-row">
+                    <!-- Info -->
+                    <div class="bg-brand-900 text-white p-8 md:w-2/5 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-6">นายนพชัย สิทธิ</h3>
+                            <ul class="space-y-6">
+                                <li class="flex items-start">
+                                    <i class="fa-solid fa-location-dot mt-1 mr-4 text-accent-500 text-xl"></i>
+                                    <div>
+                                        <p class="font-bold">สถานที่ทำงาน</p>
+                                        <p class="text-sm text-brand-200 mt-1">กลุ่มนิเทศฯ สพป.ลำปาง เขต 2<br>เลขที่ 222 หมู่ 2 ต.ศาลา อ.เกาะคา จ.ลำปาง 52130</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa-solid fa-phone mt-1 mr-4 text-accent-500 text-xl"></i>
+                                    <div>
+                                        <p class="font-bold">เบอร์โทรศัพท์</p>
+                                        <p class="text-sm text-brand-200 mt-1">0-5428-1425 ต่อ กลุ่มนิเทศฯ</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa-solid fa-envelope mt-1 mr-4 text-accent-500 text-xl"></i>
+                                    <div>
+                                        <p class="font-bold">อีเมล</p>
+                                        <p class="text-sm text-brand-200 mt-1">nopchai.s@lpg2.go.th</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="mt-12 flex space-x-4">
+                            <!-- ลิงก์ Social Media ของคุณ -->
+                            <a href="https://facebook.com/" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-600 transition"><i class="fa-brands fa-facebook-f"></i></a>
+                            <a href="https://line.me/" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-600 transition"><i class="fa-brands fa-line"></i></a>
+                        </div>
+                    </div>
+                    
+                    <!-- Google Maps Iframe -->
+                    <div class="bg-slate-100 md:w-3/5 relative min-h-[300px]">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15197.80164293848!2d99.387123!3d18.176435!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30d934bb6a301d29%3A0xb3cf51a141b212f4!2z4Liq4Lie4LibLuC4peC4s-C4m-C4suC4hyDguYDguILguJUy!5e0!3m2!1sth!2sth!4v1700000000000!5m2!1sth!2sth" 
+                                class="absolute inset-0 w-full h-full border-0" 
+                                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+    <!-- Global Footer -->
+    <footer class="bg-brand-900 text-brand-100 pt-10 pb-6 border-t-4 border-accent-500 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h2 class="text-xl font-bold text-white mb-2">นายนพชัย สิทธิ | ศึกษานิเทศก์ชำนาญการพิเศษ</h2>
+            <div class="text-xs text-brand-400 border-t border-brand-800 pt-6 mt-4">
+                <p>&copy; 2026 E-Portfolio Web App. By Mr.Nopchai Sitti.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Web App Logic (JavaScript) -->
+    <script>
+        // Function to handle Navigation
+        function navigate(viewId) {
+            // 1. Hide all views
+            document.querySelectorAll('.page-view').forEach(view => {
+                view.classList.remove('active');
+            });
+            
+            // 2. Show the selected view
+            document.getElementById('view-' + viewId).classList.add('active');
+
+            // 3. Update styling for Desktop Navigation links
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('text-brand-800', 'border-b-2', 'border-brand-800');
+                btn.classList.add('text-slate-600');
+                
+                if(btn.dataset.target === viewId) {
+                    btn.classList.add('text-brand-800', 'border-b-2', 'border-brand-800');
+                    btn.classList.remove('text-slate-600');
+                }
+            });
+
+            // 4. Update styling for Mobile Navigation links
+            document.querySelectorAll('.mobile-nav-btn').forEach(btn => {
+                btn.classList.remove('text-brand-800', 'font-medium');
+                btn.classList.add('text-slate-600');
+                
+                if(btn.dataset.target === viewId) {
+                    btn.classList.add('text-brand-800', 'font-medium');
+                    btn.classList.remove('text-slate-600');
+                }
+            });
+
+            // 5. Close mobile menu if it's open
+            document.getElementById('mobile-menu').classList.add('hidden');
+
+            // 6. Scroll smoothly to the top of the page
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Function to toggle Mobile Menu open/close
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        // Initialize: Show home page on first load
+        window.onload = function() {
+            navigate('home');
+        };
+    </script>
+</body>
+</html>
